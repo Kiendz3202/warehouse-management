@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
-// import classes from './modal.module.css'
+import classes from './modal.module.css'
 import CloseIcon from '@mui/icons-material/Close';
 
 function Modal({ show, onClose, children }) {
@@ -17,9 +17,10 @@ function Modal({ show, onClose, children }) {
 
     const modalContent = show ? (
         <div>
+            {/* <div className=' fixed top-0 left-0 w-full h-sreen z-20 bg-black bg-opacity-75' onClick={handleClose}>Close</div> */}
             <div className='backdrop' onClick={handleClose}>Close</div>
-            <div className='modal'>
-                <div className=' cursor-pointer flex justify-end' onClick={handleClose}><CloseIcon /></div>
+            <div style={ }>
+                <div className='modal' onClick={handleClose}><CloseIcon /></div>
                 <div >{children}</div>
                 <div className='flex '>
                     <div className='h-[38px] text-center hover:opacity-80 rounded-md ml-[200px] px-[12px] py-[6px]  border border-white bg-blue-500 cursor-pointer'>

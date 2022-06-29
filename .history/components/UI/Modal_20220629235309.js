@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
-// import classes from './modal.module.css'
+import classes from './modal.module.css'
 import CloseIcon from '@mui/icons-material/Close';
 
 function Modal({ show, onClose, children }) {
