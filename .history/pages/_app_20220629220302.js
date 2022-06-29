@@ -2,7 +2,6 @@ import '../styles/globals.css'
 import Layout from '../components/Layout/Layout'
 import { useRouter } from 'next/router'
 import { Provider } from 'react-redux'
-import store from '../store/store'
 
 function MyApp({ Component, pageProps }) {
 
@@ -11,7 +10,7 @@ function MyApp({ Component, pageProps }) {
     return <Component {...pageProps} />
   } else {
     return (
-      <Provider store={store}>
+      <Provider>
         <Layout>
           <Component {...pageProps} />
         </Layout>
