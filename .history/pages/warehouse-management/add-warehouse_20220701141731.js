@@ -7,11 +7,12 @@ function AddWarehouse() {
     const [name, setName] = useState('')
     const [desc, setDesc] = useState('')
     const [location, setLocation] = useState('')
-    const [loading, setLoading] = useState(false)
+    const [formData, setFormData] = useState('')
     const router = useRouter()
 
     const nameHandle = (e) => {
         setName(e.target.value)
+        console.log(name)
     }
 
     const descHandle = (e) => {
@@ -23,7 +24,6 @@ function AddWarehouse() {
     }
 
     const addWarehouseHandle = async () => {
-        setLoading(true)
         try {
             const res = await fetch('http://165.22.49.78:10000/storage', {
                 method: 'POST',
@@ -45,11 +45,9 @@ function AddWarehouse() {
             if (data.error.code == 200) {
                 router.push('/warehouse-management')
             }
-            setLoading(false)
             console.log(data)
         } catch (err) {
             console.log('post wrong')
-            setLoading(false)
         }
     }
 
@@ -94,7 +92,6 @@ function AddWarehouse() {
                     </div>
                 </div>
             </div>
-            {loading ? <Loading /> : ''}
         </div>
     )
 }

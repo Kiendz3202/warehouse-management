@@ -5,6 +5,12 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 function IoManagement() {
+    const [imageUrl, setImageUrl] = useState('')
+
+    const imageHandle = (e) => {
+        console.log(URL.createObjectURL(e.target.files[0]))
+        setImageUrl(URL.createObjectURL(e.target.files[0]))
+    }
 
     return (
         <div className='bg-blue-500 w-full h-full min-h-screen   p-[36px]'>
@@ -24,6 +30,8 @@ function IoManagement() {
             </div>
             <div>
                 {/* <WarehouseList /> */}
+                <input onChange={imageHandle} type='file' />
+                <img src={imageUrl} />
             </div>
             <div className='fixed bottom-0 left-[292px] right-[36px] h-[54px] border-t border-black'>
                 {/* <Save /> */}

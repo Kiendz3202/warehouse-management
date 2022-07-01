@@ -7,11 +7,13 @@ function AddWarehouse() {
     const [name, setName] = useState('')
     const [desc, setDesc] = useState('')
     const [location, setLocation] = useState('')
+    const [formData, setFormData] = useState('')
     const [loading, setLoading] = useState(false)
     const router = useRouter()
 
     const nameHandle = (e) => {
         setName(e.target.value)
+        console.log(name)
     }
 
     const descHandle = (e) => {

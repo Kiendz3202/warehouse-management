@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useRouter } from 'next/router';
-import Loading from '../../components/UI/Loading';
 
 function AddWarehouse() {
     const [name, setName] = useState('')
     const [desc, setDesc] = useState('')
     const [location, setLocation] = useState('')
-    const [loading, setLoading] = useState(false)
+    const [formData, setFormData] = useState('')
     const router = useRouter()
 
     const nameHandle = (e) => {
         setName(e.target.value)
+        console.log(name)
     }
 
     const descHandle = (e) => {
@@ -22,35 +22,13 @@ function AddWarehouse() {
         setLocation(e.target.value)
     }
 
-    const addWarehouseHandle = async () => {
-        setLoading(true)
-        try {
-            const res = await fetch('http://165.22.49.78:10000/storage', {
-                method: 'POST',
-                body: JSON.stringify({
-                    name,
-                    desc,
-                    location
-                }),
-                headers: {
-                    "Content-type": "application/json"
-                }
-            })
-            if (!res) {
-                throw new Error('somethign wrong');
-                return;
-            }
-
-            const data = await res.json()
-            if (data.error.code == 200) {
-                router.push('/warehouse-management')
-            }
-            setLoading(false)
-            console.log(data)
-        } catch (err) {
-            console.log('post wrong')
-            setLoading(false)
-        }
+    const addWarehouseHandle = () => {
+        setFormData({
+            name,
+            desc,
+            location
+        })
+        console.log(formData)
     }
 
     return (
@@ -94,7 +72,6 @@ function AddWarehouse() {
                     </div>
                 </div>
             </div>
-            {loading ? <Loading /> : ''}
         </div>
     )
 }

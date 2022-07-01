@@ -33,7 +33,7 @@ function warehouseList() {
         }
     }
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         fetchWarehouse()
     }, [])
 
@@ -57,7 +57,7 @@ function warehouseList() {
                 </div>
             </div>
             {/* {pagination.currentData ? pagination.currentData.map((item) => <ProductItem isSelectedAll={isSelectedAll} key={item.id} id={item.id} sku={item.sku} name={item.name} category={item.category} price={item.price} amount={item.amount} vendor={item.vendor} arrivalDate={item.arrivalDate} />) : <Box sx={{ display: 'flex' }}> */}
-            {warehouseData.map(warehouse => <ItemWarehouse id={warehouse.id} key={warehouse.id} name={warehouse.name} desc={warehouse.desc} location={warehouse.location} />)}
+            {warehouseData.map(warehouse => <ItemWarehouse name={warehouse.name} desc={warehouse.desc} location={warehouse.location} />)}
             {/* <CircularProgress /> */}
             {/* </Box>} */}
             {/* <Pagination getNumberPerPage={numberPerPageHandle} pageCount={pagination.pageCount} onPageChange={handleClick} /> */}

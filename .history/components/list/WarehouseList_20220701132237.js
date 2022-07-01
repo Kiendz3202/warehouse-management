@@ -11,7 +11,7 @@ import { warehouseSliceActions } from '../../store/warehouseSlice';
 
 function warehouseList() {
     const warehouseData = useSelector((state) => state.warehouse.warehouse)
-    // const [warehouseList, setWarehouseList] = useState(warehouseData)
+    const [warehouseList, setWarehouseList] = useState(warehouseData)
 
     const dispatch = useDispatch()
 
@@ -24,18 +24,18 @@ function warehouseList() {
             }
             const data = await response.json()
             dispatch(warehouseSliceActions.saveWarehouse({
-                data: data.data
+                data: data
             }))
-            // setWarehouseList(data)
-            // console.log(warehouseData)
+            setWarehouseList(data)
+            console.log(warehouseData)
         } catch (err) {
             console.log('fetch wrong')
         }
     }
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         fetchWarehouse()
-    }, [])
+    }, [warehouseList])
 
     const removeHandle = () => {
 
@@ -57,7 +57,7 @@ function warehouseList() {
                 </div>
             </div>
             {/* {pagination.currentData ? pagination.currentData.map((item) => <ProductItem isSelectedAll={isSelectedAll} key={item.id} id={item.id} sku={item.sku} name={item.name} category={item.category} price={item.price} amount={item.amount} vendor={item.vendor} arrivalDate={item.arrivalDate} />) : <Box sx={{ display: 'flex' }}> */}
-            {warehouseData.map(warehouse => <ItemWarehouse id={warehouse.id} key={warehouse.id} name={warehouse.name} desc={warehouse.desc} location={warehouse.location} />)}
+            <ItemWarehouse />
             {/* <CircularProgress /> */}
             {/* </Box>} */}
             {/* <Pagination getNumberPerPage={numberPerPageHandle} pageCount={pagination.pageCount} onPageChange={handleClick} /> */}

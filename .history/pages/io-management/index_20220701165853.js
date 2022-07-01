@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import SearchForm from '../../components/SearchForm.js/SearchForm'
 import WarehouseList from '../../components/list/WarehouseList'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 function IoManagement() {
+
+    const imageHandle = (e) => {
+        console.log(URL.createObjectURL(e.target.files))
+    }
 
     return (
         <div className='bg-blue-500 w-full h-full min-h-screen   p-[36px]'>
@@ -24,6 +28,7 @@ function IoManagement() {
             </div>
             <div>
                 {/* <WarehouseList /> */}
+                <input onChange={imageHandle} type='file' />
             </div>
             <div className='fixed bottom-0 left-[292px] right-[36px] h-[54px] border-t border-black'>
                 {/* <Save /> */}

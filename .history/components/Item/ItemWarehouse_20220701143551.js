@@ -5,16 +5,11 @@ import WarehouseIcon from '@mui/icons-material/Warehouse';
 import Link from 'next/link';
 import EditIcon from '@mui/icons-material/Edit';
 import Modal from '../UI/Modal';
-import Loading from '../UI/Loading';
-import { useRouter } from 'next/router';
 
-function ItemWarehouse({ id, name, desc, location }) {
+function ItemWarehouse({ name, desc, location }) {
     const [nameUpdate, setNameUpdate] = useState(name)
     const [descUpdate, setDescUpdate] = useState(desc)
     const [locationUpdate, setLocationUpdate] = useState(location)
-    const [loading, setLoading] = useState(false)
-
-    const router = useRouter()
 
     const [showModal, setShowModal] = useState(false)
 
@@ -22,45 +17,12 @@ function ItemWarehouse({ id, name, desc, location }) {
         setNameUpdate(e.target.value)
     }
 
-    const descHandle = (e) => {
+    const deschandle = (e) => {
         setDescUpdate(e.target.value)
     }
 
     const locationHandle = (e) => {
         setLocationUpdate(e.target.value)
-    }
-
-    const updateHandle = async () => {
-        setLoading(true)
-
-        try {
-            const res = await fetch(`http://165.22.49.78:10000/storage/${id}`, {
-                method: 'PUT',
-                body: JSON.stringify({
-                    name: nameUpdate,
-                    desc: descUpdate,
-                    location: locationUpdate
-                }),
-                headers: {
-                    'Content-type': 'application/json'
-                }
-            })
-
-            if (!res) {
-                throw new Error('edit failed')
-                return;
-            }
-
-            const data = await res.json()
-            if (data.error.code == 200) {
-                console.log('edit success')
-                router.reload(window.location.pathname)
-            }
-            setLoading(false)
-        } catch (err) {
-            console.log('edit fail')
-            setLoading(false)
-        }
     }
 
     return (
@@ -69,7 +31,7 @@ function ItemWarehouse({ id, name, desc, location }) {
                 {/* <input type='checkbox' className='mr-[10px] leading-[24px] ml-[20px]' /> */}
                 <WarehouseIcon className='mr-[10px] leading-[24px] ml-[20px]' />
             </div>
-            <Link href='/warehouse-management/hanoi-soc'><div className=' col-span-3 my-auto hover:border-b border-black cursor-pointer  truncate'>{name}</div></Link>
+            <Link href='/warehouse-management/hanoi-soc'><div className=' col-span-3 my-auto hover:border-b border-black cursor-pointer  truncate'>{ }name</div></Link>
             <div className=' col-span-5 my-auto truncate'>{desc}</div>
             <div className=' col-span-2 my-auto truncate'>{location}</div>
             <div className=' col-span-1 my-auto pl-[5px] flex justify-between truncate'>
@@ -98,11 +60,10 @@ function ItemWarehouse({ id, name, desc, location }) {
                     </div>
                 </div>
                 <div className='flex '>
-                    <div onClick={updateHandle} className='h-[38px] text-center hover:opacity-80 rounded-md ml-[200px] px-[12px] py-[6px]  border border-white bg-blue-500 cursor-pointer'>
-                        <button className='text-black ' >Update warehouse</button>
+                    <div className='h-[38px] text-center hover:opacity-80 rounded-md ml-[200px] px-[12px] py-[6px]  border border-white bg-blue-500 cursor-pointer'>
+                        <button className='text-black ' >Update product</button>
                     </div>
                 </div>
-                {loading && <Loading />}
             </Modal>
         </div>
     )

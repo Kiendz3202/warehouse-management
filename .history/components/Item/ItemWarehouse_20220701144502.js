@@ -5,16 +5,12 @@ import WarehouseIcon from '@mui/icons-material/Warehouse';
 import Link from 'next/link';
 import EditIcon from '@mui/icons-material/Edit';
 import Modal from '../UI/Modal';
-import Loading from '../UI/Loading';
-import { useRouter } from 'next/router';
 
-function ItemWarehouse({ id, name, desc, location }) {
+function ItemWarehouse({ name, desc, location }) {
     const [nameUpdate, setNameUpdate] = useState(name)
     const [descUpdate, setDescUpdate] = useState(desc)
     const [locationUpdate, setLocationUpdate] = useState(location)
     const [loading, setLoading] = useState(false)
-
-    const router = useRouter()
 
     const [showModal, setShowModal] = useState(false)
 
@@ -34,7 +30,7 @@ function ItemWarehouse({ id, name, desc, location }) {
         setLoading(true)
 
         try {
-            const res = await fetch(`http://165.22.49.78:10000/storage/${id}`, {
+            const res = await fetch('http://165.22.49.78:10000/storage', {
                 method: 'PUT',
                 body: JSON.stringify({
                     name: nameUpdate,
@@ -54,7 +50,6 @@ function ItemWarehouse({ id, name, desc, location }) {
             const data = await res.json()
             if (data.error.code == 200) {
                 console.log('edit success')
-                router.reload(window.location.pathname)
             }
             setLoading(false)
         } catch (err) {
@@ -99,10 +94,9 @@ function ItemWarehouse({ id, name, desc, location }) {
                 </div>
                 <div className='flex '>
                     <div onClick={updateHandle} className='h-[38px] text-center hover:opacity-80 rounded-md ml-[200px] px-[12px] py-[6px]  border border-white bg-blue-500 cursor-pointer'>
-                        <button className='text-black ' >Update warehouse</button>
+                        <button className='text-black ' >Update product</button>
                     </div>
                 </div>
-                {loading && <Loading />}
             </Modal>
         </div>
     )

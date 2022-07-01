@@ -1,19 +1,14 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Delete from '@mui/icons-material/Delete';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import WarehouseIcon from '@mui/icons-material/Warehouse';
 import ItemWarehouse from '../Item/ItemWarehouse';
 import Pagination from '../Pagination/Pagination';
-import { useDispatch, useSelector } from 'react-redux';
-import { warehouseSliceActions } from '../../store/warehouseSlice';
 
 
 function warehouseList() {
-    const warehouseData = useSelector((state) => state.warehouse.warehouse)
-    // const [warehouseList, setWarehouseList] = useState(warehouseData)
-
-    const dispatch = useDispatch()
+    const [warehouseList, setWarehouseList] = useState([])
 
     const fetchWarehouse = async () => {
         try {
@@ -23,11 +18,8 @@ function warehouseList() {
                 return;
             }
             const data = await response.json()
-            dispatch(warehouseSliceActions.saveWarehouse({
-                data: data.data
-            }))
-            // setWarehouseList(data)
-            // console.log(warehouseData)
+            setWarehouseList(data)
+            console.log(warehouseList)
         } catch (err) {
             console.log('fetch wrong')
         }
@@ -57,7 +49,7 @@ function warehouseList() {
                 </div>
             </div>
             {/* {pagination.currentData ? pagination.currentData.map((item) => <ProductItem isSelectedAll={isSelectedAll} key={item.id} id={item.id} sku={item.sku} name={item.name} category={item.category} price={item.price} amount={item.amount} vendor={item.vendor} arrivalDate={item.arrivalDate} />) : <Box sx={{ display: 'flex' }}> */}
-            {warehouseData.map(warehouse => <ItemWarehouse id={warehouse.id} key={warehouse.id} name={warehouse.name} desc={warehouse.desc} location={warehouse.location} />)}
+            <ItemWarehouse />
             {/* <CircularProgress /> */}
             {/* </Box>} */}
             {/* <Pagination getNumberPerPage={numberPerPageHandle} pageCount={pagination.pageCount} onPageChange={handleClick} /> */}

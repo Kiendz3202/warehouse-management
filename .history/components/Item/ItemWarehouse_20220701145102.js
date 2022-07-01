@@ -54,7 +54,7 @@ function ItemWarehouse({ id, name, desc, location }) {
             const data = await res.json()
             if (data.error.code == 200) {
                 console.log('edit success')
-                router.reload(window.location.pathname)
+                router.push('/warehouse-management')
             }
             setLoading(false)
         } catch (err) {

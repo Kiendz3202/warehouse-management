@@ -54,7 +54,7 @@ function ItemWarehouse({ id, name, desc, location }) {
             const data = await res.json()
             if (data.error.code == 200) {
                 console.log('edit success')
-                router.reload(window.location.pathname)
+                window.reload()
             }
             setLoading(false)
         } catch (err) {
