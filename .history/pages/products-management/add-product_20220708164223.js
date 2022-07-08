@@ -51,28 +51,20 @@ function AddProduct() {
         setLoading(true)
 
         const dataForm = new FormData()
-
+        console.log(dataForm)
         dataForm.append('sku', sku)
         dataForm.append('name', name)
         dataForm.append('desc', desc)
-        dataForm.append('item_type_id', itemTypeId)
-        dataForm.append('images', image)
-
+        dataForm.append('itemTypeId', itemTypeId)
+        dataForm.append('image', image)
         console.log(dataForm)
 
-
-        // axios.post('https://scm-tool.thanhpp.ninja/item', dataForm,
-        //     {
-        //         headers: {
-        //             "Content-Type": "multipart/form-data"
-        //         }
-        //     }
-        // )
+        // axios.post('https://scm-tool.thanhpp.ninja/item', dataForm)
 
         try {
             const res = await fetch('https://scm-tool.thanhpp.ninja/item', {
                 method: 'POST',
-                body: dataForm
+                body: { dataForm }
                 // headers: {
                 //     "Content-type": "multipart/form-data"
                 // }
@@ -84,7 +76,7 @@ function AddProduct() {
 
             const data = await res.json()
             if (data.error.code == 200) {
-                router.push('/products-management')
+                router.push('/warehouse-management')
             }
             setLoading(false)
             console.log(data)

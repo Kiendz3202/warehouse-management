@@ -55,43 +55,43 @@ function AddProduct() {
         dataForm.append('sku', sku)
         dataForm.append('name', name)
         dataForm.append('desc', desc)
-        dataForm.append('item_type_id', itemTypeId)
-        dataForm.append('images', image)
+        dataForm.append('itemTypeId', itemTypeId)
+        dataForm.append('image', image)
 
         console.log(dataForm)
 
 
-        // axios.post('https://scm-tool.thanhpp.ninja/item', dataForm,
-        //     {
-        //         headers: {
-        //             "Content-Type": "multipart/form-data"
-        //         }
+        axios.post('https://scm-tool.thanhpp.ninja/item', dataForm,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            }
+        )
+
+        // try {
+        //     const res = await fetch('https://scm-tool.thanhpp.ninja/item', {
+        //         method: 'POST',
+        //         body: dataForm
+        //         // headers: {
+        //         //     "Content-type": "multipart/form-data"
+        //         // }
+        //     })
+        //     if (!res.ok) {
+        //         throw new Error('something wrong');
+        //         return;
         //     }
-        // )
 
-        try {
-            const res = await fetch('https://scm-tool.thanhpp.ninja/item', {
-                method: 'POST',
-                body: dataForm
-                // headers: {
-                //     "Content-type": "multipart/form-data"
-                // }
-            })
-            if (!res.ok) {
-                throw new Error('something wrong');
-                return;
-            }
-
-            const data = await res.json()
-            if (data.error.code == 200) {
-                router.push('/products-management')
-            }
-            setLoading(false)
-            console.log(data)
-        } catch (err) {
-            console.log(err)
-            setLoading(false)
-        }
+        //     const data = await res.json()
+        //     if (data.error.code == 200) {
+        //         router.push('/warehouse-management')
+        //     }
+        //     setLoading(false)
+        //     console.log(data)
+        // } catch (err) {
+        //     console.log(err)
+        //     setLoading(false)
+        // }
     }
 
     return (

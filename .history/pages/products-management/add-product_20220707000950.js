@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useRouter } from 'next/router';
 import Loading from '../../components/UI/Loading';
-import axios from 'axios';
 
 function AddProduct() {
     const [sku, setSku] = useState('')
@@ -30,8 +29,6 @@ function AddProduct() {
     }
 
     const imageHandle = (e) => {
-        setImage(e.target.files[0])
-        console.log(e.target.files[0])
         // const reader = new FileReader();
         // if (e.target.files[0]) {
         //     reader.readAsDataURL(e.target.files[0]);
@@ -41,55 +38,42 @@ function AddProduct() {
         //     setImage(readerEvent.target.result);
         //     console.log(readerEvent.target.result)
         // };
-        // const url = '/home/thanhpp/Pictures/Screenshot from ' + e.target.value.replace(/^.*[\\\/]/, '')
-        // setImage(e.target.value)
-        // console.log(url)
+        const url = '/home/thanhpp/Pictures/Screenshot from ' + e.target.value.replace(/^.*[\\\/]/, '')
+        setImage(e.target.value)
+        console.log(url)
     }
 
 
     const addWarehouseHandle = async () => {
         setLoading(true)
-
-        const dataForm = new FormData()
-
-        dataForm.append('sku', sku)
-        dataForm.append('name', name)
-        dataForm.append('desc', desc)
-        dataForm.append('item_type_id', itemTypeId)
-        dataForm.append('images', image)
-
-        console.log(dataForm)
-
-
-        // axios.post('https://scm-tool.thanhpp.ninja/item', dataForm,
-        //     {
-        //         headers: {
-        //             "Content-Type": "multipart/form-data"
-        //         }
-        //     }
-        // )
-
         try {
-            const res = await fetch('https://scm-tool.thanhpp.ninja/item', {
+            const res = await fetch(' https://scm-tool.thanhpp.ninja/item', {
                 method: 'POST',
-                body: dataForm
-                // headers: {
-                //     "Content-type": "multipart/form-data"
-                // }
+                body: JSON.stringify({
+                    sku,
+                    name,
+                    desc,
+                    location,
+                    itemTypeId,
+                    image
+                }),
+                headers: {
+                    "Content-type": "application/json"
+                }
             })
-            if (!res.ok) {
-                throw new Error('something wrong');
+            if (!res) {
+                throw new Error('somethign wrong');
                 return;
             }
 
             const data = await res.json()
             if (data.error.code == 200) {
-                router.push('/products-management')
+                router.push('/warehouse-management')
             }
             setLoading(false)
             console.log(data)
         } catch (err) {
-            console.log(err)
+            console.log('post wrong')
             setLoading(false)
         }
     }

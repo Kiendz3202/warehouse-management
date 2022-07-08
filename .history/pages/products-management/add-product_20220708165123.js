@@ -55,7 +55,7 @@ function AddProduct() {
         dataForm.append('sku', sku)
         dataForm.append('name', name)
         dataForm.append('desc', desc)
-        dataForm.append('item_type_id', itemTypeId)
+        dataForm.append('itemTypeId', itemTypeId)
         dataForm.append('images', image)
 
         console.log(dataForm)
@@ -84,7 +84,7 @@ function AddProduct() {
 
             const data = await res.json()
             if (data.error.code == 200) {
-                router.push('/products-management')
+                router.push('/warehouse-management')
             }
             setLoading(false)
             console.log(data)

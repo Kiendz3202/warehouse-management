@@ -84,7 +84,7 @@ function AddProduct() {
 
             const data = await res.json()
             if (data.error.code == 200) {
-                router.push('/products-management')
+                router.push('/warehouse-management')
             }
             setLoading(false)
             console.log(data)

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useRouter } from 'next/router';
 import Loading from '../../components/UI/Loading';
-import axios from 'axios';
 
 function AddProduct() {
     const [sku, setSku] = useState('')
@@ -55,19 +54,19 @@ function AddProduct() {
         dataForm.append('sku', sku)
         dataForm.append('name', name)
         dataForm.append('desc', desc)
-        dataForm.append('item_type_id', itemTypeId)
-        dataForm.append('images', image)
+        dataForm.append('itemTypeId', itemTypeId)
+        dataForm.append('image', image)
+        console.log(image)
 
-        console.log(dataForm)
-
-
-        // axios.post('https://scm-tool.thanhpp.ninja/item', dataForm,
-        //     {
-        //         headers: {
-        //             "Content-Type": "multipart/form-data"
-        //         }
-        //     }
-        // )
+        fetch('https://httpbin.org/post', {
+            method: "POST", // or "PUT"
+            body: payload,
+            // No content-type! With FormData obect, Fetch API sets this automatically.
+            // Doing so manually can lead to an error
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(err => console.log(err))
 
         try {
             const res = await fetch('https://scm-tool.thanhpp.ninja/item', {
@@ -84,7 +83,7 @@ function AddProduct() {
 
             const data = await res.json()
             if (data.error.code == 200) {
-                router.push('/products-management')
+                router.push('/warehouse-management')
             }
             setLoading(false)
             console.log(data)
