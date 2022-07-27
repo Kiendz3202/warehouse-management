@@ -4,9 +4,9 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Loading from '../../../../components/UI/Loading';
 
 function TypeId() {
-    const [id, setId] = useState()
-    const [name, setName] = useState()
-    const [desc, setDesc] = useState()
+    const [id, setId] = useState(id)
+    const [name, setName] = useState(name)
+    const [desc, setDesc] = useState(desc)
     const [loading, setLoading] = useState(false)
     const router = useRouter()
 
