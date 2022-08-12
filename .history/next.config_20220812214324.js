@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 module.exports {
   nextConfig: {
-    reactStrictMode: false,
+    reactStrictMode: true,
 },
   eslint: {
     // Warning: This allows production builds to successfully complete even if
