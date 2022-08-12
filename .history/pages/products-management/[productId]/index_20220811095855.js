@@ -4,6 +4,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Loading from '../../../components/UI/Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { productsSliceActions } from '../../../store/productsSlice';
+import { useSelector } from 'react-redux';
 
 
 function ProductId() {
